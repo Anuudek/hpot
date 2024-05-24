@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
-	<event name="Otservbr example 1" startdate="11/03/2020" enddate="12/30/2023" script="example.lua" >
-		<ingame exprate="100" lootrate="100" bosslootrate="100" spawnrate="100" skillrate="100" />
-		<description description="Otserver br example 1 description double exp and a half, double loot !chance!, regular spawn and double skill" />
-		<colors colordark="#235c00" colorlight="#2d7400" />
-		<details displaypriority="6" isseasonal="0" specialevent="0" />
+	<event name="Enjoy!" startdate="05/01/2024" enddate="05/10/2024" >
+		<ingame exprate="150" lootrate="100" spawnrate="100" skillrate="150" />
+		<description description="A inauguração do AestheticOT chegou, aproveite com o evento Double XP e skills por vários dias!" />
+		<colors colordark="#009EFF" colorlight="#009EFF" />
+		<details displaypriority="0" isseasonal="0" specialevent="0" />
 	</event>
-	<event name="Otservbr example 2" startdate="2/2/2022" enddate="12/31/2023" script="" >
-		<ingame exprate="100" lootrate="100" bosslootrate="100" spawnrate="100" skillrate="100" />
-		<description description="Otserver br example 2 description 50% less exp, triple loot !chance!, 50% faster spawn and regular skill" />
-		<colors colordark="#735D10" colorlight="#8B6D05" />
-		<details displaypriority="6" isseasonal="0" specialevent="0" />
+	<event name="Off the Wall" startdate="05/03/2024" enddate="05/09/2024" >
+		<ingame exprate="200" lootrate="100" spawnrate="200" skillrate="200" />
+		<description description="No reino de Quadrisol, onde as ruas eram quadriculadas e a arte florescia, uma sombra ameaçava a criatividade. O feiticeiro Monotonia lançou uma maldição, tornando tudo cinza. O Rei Skater convocou heróis para encontrar os lendários Chuteiras da Criatividade. Eles enfrentaram desafios e perigos, mas finalmente encontraram as chuteiras. Ao calçá-las, as cores voltaram, a criatividade floresceu novamente. Quadrisol estava salva, e a marca Vans foi honrada, pois seu espírito 'Off the Wall' prevaleceu." />
+		<colors colordark="#009EFF" colorlight="#009EFF" />
+		<details displaypriority="2" isseasonal="0" specialevent="1" />
 	</event>
 </events>
