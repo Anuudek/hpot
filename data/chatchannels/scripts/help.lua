@@ -4,11 +4,24 @@ local muted = Condition(CONDITION_CHANNELMUTEDTICKS, CONDITIONID_DEFAULT)
 muted:setParameter(CONDITION_PARAM_SUBID, CHANNEL_HELP)
 muted:setParameter(CONDITION_PARAM_TICKS, 3600000)
 
+local mutedCooldown = Condition(CONDITION_CHANNELMUTEDTICKS, CONDITIONID_DEFAULT)
+mutedCooldown:setParameter(CONDITION_PARAM_SUBID, CHANNEL_HELP)
+mutedCooldown:setParameter(CONDITION_PARAM_TICKS, 120000)
+
 function onSpeak(player, type, message)
 	local playerGroupType = player:getGroup():getId()
-	if player:getLevel() == 1 and playerGroupType == GROUP_TYPE_NORMAL then
-		player:sendCancelMessage("You may not speak into channels as long as you are on level 1.")
+	if player:getLevel() < 50 and playerGroupType == GROUP_TYPE_NORMAL then
+		player:sendCancelMessage("Only players level 50+ are allowed to send messages on this channel.")
 		return false
+	end
+
+	if player:getCondition(CONDITION_CHANNELMUTEDTICKS, CONDITIONID_DEFAULT, CHANNEL_HELP) then
+		player:sendCancelMessage("You may only send another message in 120 seconds.")
+		return false
+	end
+
+	if playerGroupType == GROUP_TYPE_NORMAL then
+		player:addCondition(mutedCooldown)
 	end
 
 	local hasExhaustion = player:kv():get("channel-help-exhaustion") or 0
