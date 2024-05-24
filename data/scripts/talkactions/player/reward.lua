@@ -1,20 +1,19 @@
 local config = {
 	items = {
-		{ id = 35284, charges = 64400 },
-		{ id = 35279, charges = 64400 },
-		{ id = 35281, charges = 64400 },
-		{ id = 35283, charges = 64400 },
-		{ id = 35282, charges = 64400 },
-		{ id = 35280, charges = 64400 },
-		{ id = 44066, charges = 64400 },
+		{ id = 35285, charges = 5000 },
+		{ id = 35286, charges = 5000 },
+		{ id = 35287, charges = 5000 },
+		{ id = 35288, charges = 5000 },
+		{ id = 35289, charges = 5000 },
+		{ id = 35290, charges = 5000 },
 	},
 	storage = tonumber(Storage.PlayerWeaponReward), -- storage key, player can only win once
 }
 
 local function sendExerciseRewardModal(player)
 	local window = ModalWindow({
-		title = "Exercise Reward",
-		message = "choose a item",
+		title = "Exercise Weapon Reward",
+		message = "Choose a item:",
 	})
 	for _, it in pairs(config.items) do
 		local iType = ItemType(it.id)
@@ -31,12 +30,12 @@ local function sendExerciseRewardModal(player)
 					if item then
 						item:setActionId(IMMOVABLE_ACTION_ID)
 						item:setAttribute(ITEM_ATTRIBUTE_STORE, systemTime())
-						item:setAttribute(ITEM_ATTRIBUTE_DESCRIPTION, string.format("You won this exercise weapon as a reward to be a %s player. Use it in a dummy!\nHave a nice game..", configManager.getString(configKeys.SERVER_NAME)))
+						item:setAttribute(ITEM_ATTRIBUTE_DESCRIPTION, string.format("You won this exercise weapon as a reward to be a %s player. Use it in a dummy!", configManager.getString(configKeys.SERVER_NAME)))
 					else
 						player:sendTextMessage(MESSAGE_LOOK, "You need to have capacity and empty slots to receive.")
 						return
 					end
-					player:sendTextMessage(MESSAGE_LOOK, string.format("Congratulations, you received a %s with %i charges in your store inbox.", iType:getName(), it.charges))
+					player:sendTextMessage(MESSAGE_LOOK, string.format("Congratulations, you received 5 prey cards and a %s with %i charges in your store inbox.", iType:getName(), it.charges))
 					player:setStorageValue(config.storage, 1)
 				else
 					player:sendTextMessage(MESSAGE_LOOK, "You need to have capacity and empty slots to receive.")
@@ -56,11 +55,16 @@ function exerciseRewardModal.onSay(player, words, param)
 	if not configManager.getBoolean(configKeys.TOGGLE_RECEIVE_REWARD) or player:getTown():getId() < TOWNS_LIST.AB_DENDRIEL then
 		return true
 	end
+	if player:getLevel() < 20 or player:getVocation():getId() < 1 then
+		player:sendTextMessage(MESSAGE_LOOK, "It's necessary to be level 20 and have a vocation to use this command.")
+		return true
+	end
 	if player:getStorageValue(config.storage) > 0 then
-		player:sendTextMessage(MESSAGE_LOOK, "You already received your exercise weapon reward!")
+		player:sendTextMessage(MESSAGE_LOOK, "You have already earned this reward.")
 		return true
 	end
 	sendExerciseRewardModal(player)
+	player:addPreyCards(5)
 	return true
 end
 
